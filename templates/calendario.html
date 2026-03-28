@@ -1,0 +1,877 @@
+{% extends "base.html" %}
+
+{% block title %}Alocação de Horas{% endblock %}
+
+{% block content %}
+<style>
+        .calendar-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .filters-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .month-nav button {
+            background: #8B1538;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .month-nav button:hover {
+            background: #A91B47;
+            transform: scale(1.1);
+        }
+
+        #current-month {
+            font-size: 24px;
+            font-weight: 600;
+            color: #8B1538;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .calendar-table th {
+            background: linear-gradient(135deg, #8B1538 0%, #A91B47 100%);
+            color: white;
+            padding: 15px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .calendar-table td {
+            border: 1px solid #e9ecef;
+            width: 14.28%;
+            height: 80px;
+            vertical-align: top;
+            padding: 8px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-table td:hover {
+            background-color: #f8f9fa;
+        }
+
+        .day-number {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .day-content {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .calendar-table td.selected {
+            border: 3px solid #007bff !important;
+            background-color: rgba(0, 123, 255, 0.1) !important;
+        }
+
+        .allocation-form {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #8B1538;
+            box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8B1538 0%, #A91B47 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(139, 21, 56, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .alert {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .selected-days {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .selected-days h6 {
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+
+        .selected-date {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 12px;
+        }
+        
+        .form-control.invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+        }
+        
+        .form-control.valid {
+            border-color: #28a745 !important;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+        }
+        
+        .suggestions-list {
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            display: none;
+        }
+        
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .suggestion-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+</style>
+
+<!-- Formulário de alocação ANTES do calendário -->
+<div class="card">
+    <div class="card-header analytics-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class="d-flex align-items-center">
+                <h5 class="mb-0 me-4">
+                    <i class="fas fa-calendar me-2"></i>Alocação
+                </h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="vr d-none d-md-block" style="height: 30px;"></div>
+                <span id="selection-count" class="badge bg-info">0 selecionadas</span>
+                <span id="hours-balance" class="badge bg-warning ms-2">Saldo: 0h</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="allocation-project">Projeto *</label>
+                <input type="text" id="allocation-project" class="form-control" placeholder="Digite para buscar projeto..." autocomplete="off" list="project-datalist">
+                <datalist id="project-datalist"></datalist>
+                <div id="project-suggestions" class="suggestions-list"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="allocation-activity">Atividade *</label>
+                <input type="text" id="allocation-activity" class="form-control" placeholder="Digite para buscar atividade..." autocomplete="off" list="activity-datalist">
+                <datalist id="activity-datalist"></datalist>
+                <div id="activity-suggestions" class="suggestions-list"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="allocation-type">Tipo de Alocação *</label>
+                <input type="text" id="allocation-type" class="form-control" placeholder="Digite para buscar tipo..." autocomplete="off" list="type-datalist">
+                <datalist id="type-datalist"></datalist>
+                <div id="type-suggestions" class="suggestions-list"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="allocation-percentage">% *</label>
+                <input type="number" id="allocation-percentage" class="form-control" min="1" max="100" value="100" required style="width: 80px;">
+            </div>
+        </div>
+    </div>
+    
+        <!-- Contador e botões de ação -->
+        <div class="mb-3 d-flex flex-wrap gap-2">
+            <button id="select-all" class="btn btn-claro flex-fill" style="min-width: 140px; background-color: #8B1538 !important; border-color: #8B1538 !important; color: white !important;" onclick="selectAllDays()">
+                <i class="fas fa-check-square me-2"></i>Selecionar Tudo
+            </button>
+            <button id="deselect-all" class="btn btn-secondary flex-fill" style="min-width: 140px;" onclick="clearSelected()">
+                <i class="fas fa-square me-2"></i>Desmarcar Tudo
+            </button>
+            <button id="allocate-selected" class="btn btn-success flex-fill" style="min-width: 140px;" onclick="allocateSelected()">
+                <i class="fas fa-plus"></i> Alocar
+            </button>
+            <button id="deallocate-selected" class="btn btn-danger flex-fill" style="min-width: 140px;" onclick="deallocateSelected()">
+                <i class="fas fa-minus"></i> Desalocar
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="calendar-container">
+
+    <!-- Cabeçalho do calendário -->
+    <div class="calendar-header">
+        <div class="month-nav">
+            <button onclick="previousMonth()" title="Mês anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <h2 id="current-month">Janeiro 2025</h2>
+            <button onclick="nextMonth()" title="Próximo mês">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Calendário -->
+    <table class="calendar-table">
+        <thead>
+            <tr>
+                <th>Dom</th>
+                <th>Seg</th>
+                <th>Ter</th>
+                <th>Qua</th>
+                <th>Qui</th>
+                <th>Sex</th>
+                <th>Sáb</th>
+            </tr>
+        </thead>
+        <tbody id="calendar-body">
+            <!-- Dias do calendário serão inseridos aqui via JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Dias selecionados -->
+    <div id="selected-days-display" class="selected-days" style="display: none;">
+        <h6><i class="fas fa-calendar-check"></i> Dias selecionados</h6>
+        <div id="selected-dates-list"></div>
+    </div>
+</div>
+
+
+
+<script>
+    let currentDate = new Date();
+    let selectedDays = [];
+
+    // Dados para autocompletar (serão carregados da API)
+    let projectsData = [];
+    let activitiesData = [];
+    let typesData = [];
+
+    // Carregar dados iniciais
+    document.addEventListener('DOMContentLoaded', function() {
+        generateCalendar();
+        loadAutocompleteData();
+        loadCalendarData();
+        setupAutocomplete();
+    });
+
+    // Gerar calendário
+    function generateCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        document.getElementById('current-month').textContent = 
+            new Date(year, month).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        const calendarBody = document.getElementById('calendar-body');
+        calendarBody.innerHTML = '';
+        
+        let date = 1;
+        
+        for (let week = 0; week < 6; week++) {
+            const row = document.createElement('tr');
+            
+            for (let day = 0; day < 7; day++) {
+                const cell = document.createElement('td');
+                cell.className = 'calendar-day';
+                
+                if (week === 0 && day < firstDay) {
+                    cell.innerHTML = '';
+                } else if (date > daysInMonth) {
+                    break;
+                } else {
+                    const cellDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                    cell.setAttribute('data-date', cellDate);
+                    cell.innerHTML = `<div class="day-number">${date}</div><div class="day-content"></div>`;
+                    cell.onclick = () => toggleDaySelection(cellDate, cell);
+                    date++;
+                }
+                
+                row.appendChild(cell);
+            }
+            
+            calendarBody.appendChild(row);
+            
+            if (date > daysInMonth) break;
+        }
+    }
+
+    // Alternar seleção de dia
+    function toggleDaySelection(dateStr, cell) {
+        const index = selectedDays.indexOf(dateStr);
+        
+        if (index > -1) {
+            selectedDays.splice(index, 1);
+            cell.classList.remove('selected');
+            cell.style.border = '';
+            cell.style.backgroundColor = '';
+        } else {
+            selectedDays.push(dateStr);
+            cell.classList.add('selected');
+            cell.style.border = '3px solid #007bff !important';
+            cell.style.backgroundColor = 'rgba(0, 123, 255, 0.1) !important';
+        }
+        
+        updateSelectedDisplay();
+    }
+
+    // Atualizar exibição de dias selecionados
+    function updateSelectedDisplay() {
+        const display = document.getElementById('selected-days-display');
+        const list = document.getElementById('selected-dates-list');
+        
+        // Atualizar contador principal (usar mesmo ID da página de aprovação)
+        const counter = document.getElementById('selection-count');
+        if (counter) {
+            counter.textContent = `${selectedDays.length} selecionadas`;
+        }
+        
+        if (selectedDays.length === 0) {
+            display.style.display = 'none';
+        } else {
+            display.style.display = 'block';
+            list.innerHTML = selectedDays.map(dateStr => {
+                const date = new Date(dateStr);
+                const formatted = date.toLocaleDateString('pt-BR');
+                return `<span class="selected-date">${formatted}</span>`;
+            }).join('');
+        }
+    }
+
+    // Navegar meses
+    function previousMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        generateCalendar();
+        loadCalendarData();
+        
+        // Carregar alocações para o novo mês
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        setTimeout(() => {
+            loadUserAllocations(year, month);
+        }, 300);
+    }
+
+    function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        generateCalendar();
+        loadCalendarData();
+        
+        // Carregar alocações para o novo mês
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        setTimeout(() => {
+            loadUserAllocations(year, month);
+        }, 300);
+    }
+
+    // Limpar seleção
+    function clearSelected() {
+        selectedDays = [];
+        document.querySelectorAll('.calendar-day.selected').forEach(cell => {
+            cell.classList.remove('selected');
+            cell.style.border = '';
+            cell.style.backgroundColor = '';
+        });
+        updateSelectedDisplay();
+    }
+
+    // Validar campos obrigatórios
+    function validateRequiredFields() {
+        const fields = [
+            'allocation-project',
+            'allocation-activity', 
+            'allocation-type'
+        ];
+        
+        let isValid = true;
+        
+        fields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (!field.value) {
+                field.style.border = '2px solid #dc3545';
+                isValid = false;
+            } else {
+                field.style.border = '2px solid #28a745';
+            }
+        });
+        
+        if (!isValid) {
+            alert('Por favor, preencha todos os campos obrigatórios marcados com *');
+        }
+        
+        return isValid;
+    }
+
+    // Alocar dias selecionados
+    function allocateSelected() {
+        if (selectedDays.length === 0) {
+            alert('Selecione pelo menos um dia');
+            return;
+        }
+        
+        if (!validateRequiredFields()) {
+            return;
+        }
+        
+        const confirmMsg = `Confirmar alocação de ${selectedDays.length} dias?`;
+        if (confirm(confirmMsg)) {
+            // Aplicar indicadores visuais
+            selectedDays.forEach(dateStr => {
+                const cell = document.querySelector(`[data-date="${dateStr}"]`);
+                if (cell) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'allocation-indicator';
+                    indicator.style.cssText = `
+                        width: 8px;
+                        height: 8px;
+                        background: #ffc107;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 2px;
+                        right: 2px;
+                    `;
+                    indicator.title = 'Alocação Pendente';
+                    cell.appendChild(indicator);
+                }
+            });
+            
+            alert('Alocação realizada com sucesso!');
+            clearSelected();
+            clearForm();
+        }
+    }
+
+    // Selecionar todos os dias do mês
+    function selectAllDays() {
+        document.querySelectorAll('.calendar-day[data-date]').forEach(cell => {
+            const dateStr = cell.getAttribute('data-date');
+            if (dateStr && !selectedDays.includes(dateStr)) {
+                selectedDays.push(dateStr);
+                cell.classList.add('selected');
+                cell.style.border = '3px solid #007bff !important';
+                cell.style.backgroundColor = 'rgba(0, 123, 255, 0.1) !important';
+            }
+        });
+        updateSelectedDisplay();
+    }
+
+    // Desalocar dias selecionados
+    function deallocateSelected() {
+        if (selectedDays.length === 0) {
+            alert('Selecione pelo menos um dia para desalocar');
+            return;
+        }
+        
+        const confirmMsg = `Confirmar desalocação de ${selectedDays.length} dias?`;
+        if (confirm(confirmMsg)) {
+            selectedDays.forEach(dateStr => {
+                const cell = document.querySelector(`[data-date="${dateStr}"]`);
+                if (cell) {
+                    cell.querySelectorAll('.allocation-indicator').forEach(indicator => indicator.remove());
+                    cell.classList.remove('pending', 'approved', 'rejected');
+                }
+            });
+            
+            alert('Desalocação realizada com sucesso!');
+            clearSelected();
+        }
+    }
+
+    // Carregar dados para autocompletar
+    function loadAutocompleteData() {
+        console.log('Carregando dados reais do banco...');
+        fetch('/api/calendar-filters')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    projectsData = data.projects || [];
+                    activitiesData = data.activities || [];
+                    typesData = data.types || [];
+                    
+                    console.log('Dados carregados:', {
+                        projetos: projectsData.length,
+                        atividades: activitiesData.length,
+                        tipos: typesData.length
+                    });
+                    
+                    // Preencher datalists com dados reais
+                    populateDatalist('project-datalist', projectsData);
+                    populateDatalist('activity-datalist', activitiesData);
+                    populateDatalist('type-datalist', typesData);
+                } else {
+                    console.error('Erro na API:', data.error);
+                    loadDataFromPostgreSQL();
+                }
+            })
+            .catch(error => {
+                console.log('Erro ao carregar filtros:', error);
+                loadDataFromPostgreSQL();
+            });
+    }
+
+    // Buscar dados diretamente do PostgreSQL (fallback)
+    function loadDataFromPostgreSQL() {
+        console.warn('Usando dados de fallback - API não disponível');
+        projectsData = [];
+        activitiesData = [];
+        typesData = [];
+        
+        // Não usar dados sintéticos - deixar campos vazios até API funcionar
+        populateDatalist('project-datalist', []);
+        populateDatalist('activity-datalist', []);
+        populateDatalist('type-datalist', []);
+    }
+
+    // Preencher datalist
+    function populateDatalist(datalistId, dataArray) {
+        const datalist = document.getElementById(datalistId);
+        datalist.innerHTML = '';
+        dataArray.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item;
+            datalist.appendChild(option);
+        });
+    }
+
+    // Configurar autocompletar
+    function setupAutocomplete() {
+        setupFieldAutocomplete('allocation-project', 'project-suggestions', projectsData);
+        setupFieldAutocomplete('allocation-activity', 'activity-suggestions', activitiesData);
+        setupFieldAutocomplete('allocation-type', 'type-suggestions', typesData);
+    }
+
+    // Configurar autocompletar para um campo específico
+    function setupFieldAutocomplete(fieldId, suggestionsId, dataArray) {
+        const field = document.getElementById(fieldId);
+        const suggestions = document.getElementById(suggestionsId);
+
+        field.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            suggestions.innerHTML = '';
+            
+            if (value.length < 2) {
+                suggestions.style.display = 'none';
+                return;
+            }
+
+            const filtered = dataArray.filter(item => 
+                item.toLowerCase().includes(value)
+            ).slice(0, 10);
+
+            if (filtered.length > 0) {
+                suggestions.innerHTML = filtered.map(item => 
+                    `<div class="suggestion-item" onclick="selectSuggestion('${fieldId}', '${suggestionsId}', '${item}')">${item}</div>`
+                ).join('');
+                suggestions.style.display = 'block';
+            } else {
+                suggestions.style.display = 'none';
+            }
+        });
+
+        // Esconder sugestões ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!field.contains(e.target) && !suggestions.contains(e.target)) {
+                suggestions.style.display = 'none';
+            }
+        });
+    }
+
+    // Selecionar sugestão
+    function selectSuggestion(fieldId, suggestionsId, value) {
+        document.getElementById(fieldId).value = value;
+        document.getElementById(suggestionsId).style.display = 'none';
+        
+        // Validar campo após seleção
+        const field = document.getElementById(fieldId);
+        field.style.border = '2px solid #28a745';
+    }
+
+    // Limpar formulário
+    function clearForm() {
+        document.getElementById('allocation-project').value = '';
+        document.getElementById('allocation-activity').value = '';
+        document.getElementById('allocation-type').value = '';
+        document.getElementById('allocation-percentage').value = '100';
+        
+        // Resetar estilos dos campos
+        ['allocation-project', 'allocation-activity', 'allocation-type'].forEach(fieldId => {
+            document.getElementById(fieldId).style.border = '';
+        });
+    }
+
+    // Carregar dados do calendário
+    function loadCalendarData() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        
+        fetch(`/api/calendar-data?year=${year}&month=${month}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.allocations) {
+                    displayAllocations(data.allocations);
+                }
+            })
+            .catch(error => {
+                console.log('Dados do calendário não disponíveis');
+            });
+    }
+
+    // Exibir alocações no calendário
+    function displayAllocations(allocations) {
+        allocations.forEach(allocation => {
+            const cell = document.querySelector(`[data-date="${allocation.date}"]`);
+            if (cell) {
+                const indicator = document.createElement('div');
+                indicator.className = 'allocation-indicator';
+                indicator.style.cssText = `
+                    width: 8px;
+                    height: 8px;
+                    background: ${allocation.status === 'approved' ? '#28a745' : allocation.status === 'rejected' ? '#dc3545' : '#ffc107'};
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 2px;
+                    right: 2px;
+                `;
+                indicator.title = `${allocation.status === 'approved' ? 'Aprovado' : allocation.status === 'rejected' ? 'Rejeitado' : 'Pendente'}: ${allocation.percentage}%`;
+                cell.appendChild(indicator);
+            }
+        });
+    }
+
+    // Carregar alocações existentes do usuário
+    function loadUserAllocations(year, month) {
+        console.log(`Carregando alocações para: ${year}-${month}`);
+        fetch(`/api/user-allocations?user=ANDRE LUIS LINS RAMOS&month=${month}&year=${year}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Resposta da API:', data);
+                if (data.success && data.allocations) {
+                    displayAllocationsInCalendar(data.allocations);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar alocações:', error);
+            });
+    }
+
+    // Exibir alocações nas células do calendário
+    function displayAllocationsInCalendar(allocations) {
+        console.log('Exibindo alocações:', Object.keys(allocations).length, 'dias');
+        
+        setTimeout(() => {
+            Object.keys(allocations).forEach(date => {
+                const cell = document.querySelector(`[data-date="${date}"]`);
+                if (cell && allocations[date].length > 0) {
+                    // Limpar conteúdo atual
+                    cell.innerHTML = '';
+                    
+                    // Criar div para o número do dia
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'day-number';
+                    dayDiv.textContent = new Date(date).getDate();
+                    cell.appendChild(dayDiv);
+                    
+                    // Criar div para todas as alocações
+                    const allocationDiv = document.createElement('div');
+                    allocationDiv.className = 'allocation-info';
+                    
+                    // Calcular total de percentual
+                    let totalPercentual = 0;
+                    let projectsList = [];
+                    
+                    allocations[date].forEach(allocation => {
+                        totalPercentual += parseFloat(allocation.percentual) || 0;
+                        projectsList.push(allocation.projeto);
+                    });
+                    
+                    // Exibir resumo das alocações
+                    allocationDiv.innerHTML = `
+                        <div class="project-name">${projectsList.length} projeto(s)</div>
+                        <div class="percentage">${totalPercentual}% total</div>
+                    `;
+                    
+                    // Adicionar tooltip com detalhes
+                    let tooltipText = allocations[date].map(a => `${a.projeto}: ${a.percentual}%`).join('\n');
+                    cell.title = tooltipText;
+                    
+                    // Adicionar elementos à célula
+                    cell.appendChild(allocationDiv);
+                    cell.classList.add('has-allocation');
+                    
+                    // Definir cor baseada no percentual
+                    if (totalPercentual === 100) {
+                        cell.style.backgroundColor = '#d4edda'; // Verde claro
+                        cell.style.borderColor = '#28a745';
+                    } else if (totalPercentual < 100) {
+                        cell.style.backgroundColor = '#f8d7da'; // Vermelho claro
+                        cell.style.borderColor = '#dc3545';
+                    } else { // > 100
+                        cell.style.backgroundColor = '#fff3cd'; // Amarelo claro
+                        cell.style.borderColor = '#ffc107';
+                    }
+                    
+                    console.log(`Alocações adicionadas para ${date}: ${totalPercentual}% total`);
+                }
+            });
+            
+            // Calcular saldo de horas após exibir todas as alocações
+            updateHoursBalance(allocations);
+        }, 200);
+    }
+
+    // Calcular e exibir saldo de horas
+    function updateHoursBalance(allocations) {
+        const horasNormaisPorMes = 176;
+        let totalPercentualMes = 0;
+        let diasComAlocacao = 0;
+        
+        // Calcular percentual total do mês
+        Object.keys(allocations).forEach(date => {
+            if (allocations[date].length > 0) {
+                let totalDia = 0;
+                allocations[date].forEach(allocation => {
+                    totalDia += parseFloat(allocation.percentual) || 0;
+                });
+                totalPercentualMes += totalDia;
+                diasComAlocacao++;
+            }
+        });
+        
+        // Calcular média de alocação se há alocações
+        let percentualMedio = diasComAlocacao > 0 ? totalPercentualMes / diasComAlocacao : 0;
+        
+        // Calcular horas alocadas e saldo
+        let horasAlocadas = (percentualMedio / 100) * horasNormaisPorMes;
+        let saldoHoras = horasNormaisPorMes - horasAlocadas;
+        
+        // Atualizar display
+        const hoursBalance = document.getElementById('hours-balance');
+        if (hoursBalance) {
+            hoursBalance.textContent = `Saldo: ${saldoHoras.toFixed(0)}h (${percentualMedio.toFixed(1)}% alocado)`;
+            
+            // Cor do badge baseada no saldo
+            if (saldoHoras === 0) {
+                hoursBalance.className = 'badge bg-success ms-2';
+            } else if (saldoHoras < 0) {
+                hoursBalance.className = 'badge bg-danger ms-2';
+            } else {
+                hoursBalance.className = 'badge bg-warning ms-2';
+            }
+        }
+    }
+
+    // Definir variáveis de data atual
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth() + 1;
+
+    // Aguardar que o DOM esteja pronto
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carregar alocações para o mês atual na inicialização
+        setTimeout(() => {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth() + 1;
+            loadUserAllocations(year, month);
+        }, 1000);
+    });
+</script>
+{% endblock %}

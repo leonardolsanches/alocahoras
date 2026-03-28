@@ -1,0 +1,1334 @@
+{
+  "1": {
+    "id": "1",
+    "name": "A IDENTIFICAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "2": {
+    "id": "2",
+    "name": "ATIVAÇÃO SIMPLIFICADA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "3": {
+    "id": "3",
+    "name": "CACS, COBE, TQD",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "4": {
+    "id": "4",
+    "name": "CAPSETTLE/ROAMING TADIG",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "5": {
+    "id": "5",
+    "name": "CAUSA RAIZ",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "6": {
+    "id": "6",
+    "name": "CAUSA RAIZ E MELHORIAS NO GSID E SGAP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "7": {
+    "id": "7",
+    "name": "CLE E CLEF",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "8": {
+    "id": "8",
+    "name": "CLM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "9": {
+    "id": "9",
+    "name": "CONEXÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "10": {
+    "id": "10",
+    "name": "CPC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "11": {
+    "id": "11",
+    "name": "CREDITO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "12": {
+    "id": "12",
+    "name": "DEVSECOPS E COE API",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "13": {
+    "id": "13",
+    "name": "Fábrica Causa Raiz",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "14": {
+    "id": "14",
+    "name": "FATURAMENTO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "15": {
+    "id": "15",
+    "name": "FCD, IBMWEB, EBPP, SITEF, SID",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "16": {
+    "id": "16",
+    "name": "GESTÃO DE TDOS SISTEMAS FATURAMENTO EMRPESARIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "17": {
+    "id": "17",
+    "name": "GPL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "18": {
+    "id": "18",
+    "name": "IME/MEDIAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "19": {
+    "id": "19",
+    "name": "ITP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "20": {
+    "id": "20",
+    "name": "JORNADA EMPRESARIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "21": {
+    "id": "21",
+    "name": "MOBILE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "22": {
+    "id": "22",
+    "name": "MOBILE AR E COLLECTION, GEVENUE, PORTAL CCS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "23": {
+    "id": "23",
+    "name": "NUMERAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "24": {
+    "id": "24",
+    "name": "OUTROS PROJETOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "25": {
+    "id": "25",
+    "name": "PAYMENT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "26": {
+    "id": "26",
+    "name": "PORTABILIDADE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "27": {
+    "id": "27",
+    "name": "PORTABILIDADE, SOA, MOBILE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "28": {
+    "id": "28",
+    "name": "PROJETO ANATEL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "29": {
+    "id": "29",
+    "name": "RADAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "30": {
+    "id": "30",
+    "name": "RESIDENCIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "31": {
+    "id": "31",
+    "name": "RESSARCIMENTO/REGULATÓRIO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "32": {
+    "id": "32",
+    "name": "SAIP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "33": {
+    "id": "33",
+    "name": "SISTEMA FTC, ARV",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "34": {
+    "id": "34",
+    "name": "SISTEMAS CBC,EBC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "35": {
+    "id": "35",
+    "name": "SISTEMAS FDS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "36": {
+    "id": "36",
+    "name": "SISTEMAS IIF, FDS, FRN",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "37": {
+    "id": "37",
+    "name": "SISTEMAS IOI, MDD, MDI, CRN, CCE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "38": {
+    "id": "38",
+    "name": "SISTEMAS ITX, ICT, GR3, GFX, FSI, ATM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "39": {
+    "id": "39",
+    "name": "SISTEMAS RCL , ARD",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "40": {
+    "id": "40",
+    "name": "SISTEMAS RIN, TCO, TFI",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "41": {
+    "id": "41",
+    "name": "SISTEMAS RIN,TCO,TFI",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "42": {
+    "id": "42",
+    "name": "SISTEMAS SCF, SCE,SFC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "43": {
+    "id": "43",
+    "name": "SISTEMAS: STI, SGT, AXE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "44": {
+    "id": "44",
+    "name": "SISTEMS FEB, EBC, DER",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "45": {
+    "id": "45",
+    "name": "SOX GSI; RCLA; WFEP EM ABERTURA DE PPM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "46": {
+    "id": "46",
+    "name": "SRT-SGB-SER-ACCOR/MEDIAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "47": {
+    "id": "47",
+    "name": "TOA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "48": {
+    "id": "48",
+    "name": "#NÃO INFORMADO - EXCLUIR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "49": {
+    "id": "49",
+    "name": "IOT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "50": {
+    "id": "50",
+    "name": "APIs + LEGADOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "51": {
+    "id": "51",
+    "name": "ATENDIMENTO EVOLUTIVAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "52": {
+    "id": "52",
+    "name": "CLARO PAY",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "53": {
+    "id": "53",
+    "name": "COBOLETAMENTO SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "54": {
+    "id": "54",
+    "name": "FINANCEIRO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "55": {
+    "id": "55",
+    "name": "FULLFILMENT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "56": {
+    "id": "56",
+    "name": "GESTÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "57": {
+    "id": "57",
+    "name": "HLE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "58": {
+    "id": "58",
+    "name": "MELHORIAS COMBO MULTI",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "59": {
+    "id": "59",
+    "name": "MIGRAÇÃO LWC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "60": {
+    "id": "60",
+    "name": "MIGRAÇÃO LWC ATENDIMENTO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "61": {
+    "id": "61",
+    "name": "NFCOM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "62": {
+    "id": "62",
+    "name": "NFCOM - HIGIENIZAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "63": {
+    "id": "63",
+    "name": "NFCOM - TRAVAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "64": {
+    "id": "64",
+    "name": "NFCOM SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "65": {
+    "id": "65",
+    "name": "PIX Automático",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "66": {
+    "id": "66",
+    "name": "PIX AUTOMÁTICO SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "67": {
+    "id": "67",
+    "name": "PORTABILIDADE CRUZADA MOVEL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "68": {
+    "id": "68",
+    "name": "PROJETO DISCOVERY",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "69": {
+    "id": "69",
+    "name": "PROJETO ESTRATEGICO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "70": {
+    "id": "70",
+    "name": "PROJETO FULLFILMENT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "71": {
+    "id": "71",
+    "name": "PROJETO LGPD",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "72": {
+    "id": "72",
+    "name": "PROJETO NFCOM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "73": {
+    "id": "73",
+    "name": "PROJETO NFCOM TRAVAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "74": {
+    "id": "74",
+    "name": "PROJETO PCO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "75": {
+    "id": "75",
+    "name": "PROJETO PEC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "76": {
+    "id": "76",
+    "name": "PROJETO PME",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "77": {
+    "id": "77",
+    "name": "PROJETO PORTABILIDADE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "78": {
+    "id": "78",
+    "name": "PROJETO PORTIFÓLIO PÓS PAGO - Dependente Grátis",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "79": {
+    "id": "79",
+    "name": "PROJETO REENVIO DE QRCODE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "80": {
+    "id": "80",
+    "name": "PROJETO REFORMA TRIBUTÁRIA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "81": {
+    "id": "81",
+    "name": "PROJETO RGC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "82": {
+    "id": "82",
+    "name": "PROJETO SAP/HANA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "83": {
+    "id": "83",
+    "name": "PROJETO SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "84": {
+    "id": "84",
+    "name": "PROJETO SUSPENSÃO TEMPORÁRIA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "85": {
+    "id": "85",
+    "name": "PROJETO URA COGNITIVA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "86": {
+    "id": "86",
+    "name": "PROJETOS RGC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "87": {
+    "id": "87",
+    "name": "RESTITUIÇÃO EM CONFIANÇA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "88": {
+    "id": "88",
+    "name": "RESTITUIÇÃO EM CONFIANÇA SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "89": {
+    "id": "89",
+    "name": "SQUAD ATENDIMENTO EVOLUTIVAS (FIN/TEC/CROSS/KB/CC/ME/LGPD)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "90": {
+    "id": "90",
+    "name": "SQUAD DDPs ATENDIMENTO SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "91": {
+    "id": "91",
+    "name": "BILLING RESIDENCIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "92": {
+    "id": "92",
+    "name": "CONFIGURAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "93": {
+    "id": "93",
+    "name": "DEMANDAS DE TV; OTT; RECON",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "94": {
+    "id": "94",
+    "name": "GESTÃO E LIDERANÇA TÉCNICA NOVO BSS, SQUADS CATÁLOGO, OM/SELFCARE, INTEGRAÇÃO, FINANCEIRO)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "95": {
+    "id": "95",
+    "name": "GESTÃO MULTISSERVIÇOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "96": {
+    "id": "96",
+    "name": "LICITAÇÕES",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "97": {
+    "id": "97",
+    "name": "LIDERANÇA TÉCNICA NOVO BSS, SQUADS CATÁLOGO, OM/SELFCARE, INTEGRAÇÃO, FINANCEIRO)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "98": {
+    "id": "98",
+    "name": "MEDIAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "99": {
+    "id": "99",
+    "name": "MELHORIAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "100": {
+    "id": "100",
+    "name": "OBSOLESCÊNCIA DO WFEP/CNPJ ALFANUMERICO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "101": {
+    "id": "101",
+    "name": "OPERA360/GESTÃO MULTISSERVIÇOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "102": {
+    "id": "102",
+    "name": "PO NOVO BSS, SQUAD FINANCEIRO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "103": {
+    "id": "103",
+    "name": "PPM 85682",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "104": {
+    "id": "104",
+    "name": "PROGRAMA AMX",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "105": {
+    "id": "105",
+    "name": "PROJETO TÁTICO (SQUAD)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "106": {
+    "id": "106",
+    "name": "RCLA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "107": {
+    "id": "107",
+    "name": "SEGURANÇA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "108": {
+    "id": "108",
+    "name": "SIV",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "109": {
+    "id": "109",
+    "name": "SOX GSI; CNPJ ALFANUMÉRICO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "110": {
+    "id": "110",
+    "name": "SQUAD CATALOGO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "111": {
+    "id": "111",
+    "name": "SQUAD COE API E MS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "112": {
+    "id": "112",
+    "name": "SQUAD DEVSECOPS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "113": {
+    "id": "113",
+    "name": "SQUAD DEVSECOPS E COE API E MS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "114": {
+    "id": "114",
+    "name": "SQUAD DEVSECOPS, COE API",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "115": {
+    "id": "115",
+    "name": "SQUAD GOVERNANÇA API",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "116": {
+    "id": "116",
+    "name": "Squad Ongoing Perene",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "117": {
+    "id": "117",
+    "name": "SQUAD OSS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "118": {
+    "id": "118",
+    "name": "SQUAD OTT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "119": {
+    "id": "119",
+    "name": "SQUAD OTT/SVA/SGVAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "120": {
+    "id": "120",
+    "name": "SQUAD PAYMENT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "121": {
+    "id": "121",
+    "name": "SQUAD PRÉ-PAGO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "122": {
+    "id": "122",
+    "name": "SQUAD RADAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "123": {
+    "id": "123",
+    "name": "SQUAD SICORP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "124": {
+    "id": "124",
+    "name": "SQUAD SOLAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "125": {
+    "id": "125",
+    "name": "STIR SHAKEN FASE 2; CAUSA RAIZ; HLE;",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "126": {
+    "id": "126",
+    "name": "110020- EXPOSIÇÃO APIS OPERA 360\n86315 - GESTÃO AVANÇADA MULTISERVIÇOS - ENTREGA 10\n188035 - JORNADA EMPRESARIAL\n108806 - VALIDAÇÃO DE CHAMADAS (STIR SHAKEN)\n100140 - VIABILIDADE TÉCNICA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "127": {
+    "id": "127",
+    "name": "86315 - GESTÃO AVANÇADA MULTISERVIÇOS - ENTREGA 09",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "128": {
+    "id": "128",
+    "name": "86315 - GESTÃO AVANÇADA MULTISERVIÇOS - ENTREGA 13\n86315 - GESTÃO AVANÇADA MULTISERVIÇOS - ENTREGA 09\n86315 - GESTÃO MULTISSERVIÇOS - ENTREGA 7\n86888- PAGAMENTO DE APARELHOS COM CARTÃO DE CREDITO PME\n91578 - IMS TAS NETFONE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "129": {
+    "id": "129",
+    "name": "86315 - GESTÃO MULTISSERVIÇOS - ENTREGA 7",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "130": {
+    "id": "130",
+    "name": "86888- PAGAMENTO DE APARELHOS COM CARTÃO DE CREDITO PME",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "131": {
+    "id": "131",
+    "name": "91578 - IMS TAS NETFONE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "132": {
+    "id": "132",
+    "name": "ADEQUAR FTC - EXCLUSAO ICMS DA BASE DO PIS/COFINS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "133": {
+    "id": "133",
+    "name": "ADEQUAR FTC EXCLUSAO ICMS BASE PIS COFINS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "134": {
+    "id": "134",
+    "name": "ADIÇÃO DE CONVÊNIOS BANCÁRIOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "135": {
+    "id": "135",
+    "name": "ANATEL - ROBOCALLS / ANTI-SPOOFING",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "136": {
+    "id": "136",
+    "name": "APROVISIONAMENTO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "137": {
+    "id": "137",
+    "name": "CENTRAL INTERNACIONAL OPERADORAS - NICE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "138": {
+    "id": "138",
+    "name": "CLA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "139": {
+    "id": "139",
+    "name": "CLARO CONNECT IMPLANTAÇÃO DO VOLTE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "140": {
+    "id": "140",
+    "name": "CLARO MONITOR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "141": {
+    "id": "141",
+    "name": "CNPJ ALFA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "142": {
+    "id": "142",
+    "name": "COBRANÇA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "143": {
+    "id": "143",
+    "name": "DEMANDAS DE TV; NETSMS OSS; OTT; RECON",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "144": {
+    "id": "144",
+    "name": "E-SIM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "145": {
+    "id": "145",
+    "name": "E-SIM FASE 2 - CPC",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "146": {
+    "id": "146",
+    "name": "E-SIM FASE 2 - SICORP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "147": {
+    "id": "147",
+    "name": "ESTEIRA DE CAUSA RAIZ DO CLA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "148": {
+    "id": "148",
+    "name": "EVOLUCAO PLATAFORMA GAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "149": {
+    "id": "149",
+    "name": "Flex",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "150": {
+    "id": "150",
+    "name": "GERÊNCIA TÉCNICA DO PROJETO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "151": {
+    "id": "151",
+    "name": "GESTÃO AVANCADA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "152": {
+    "id": "152",
+    "name": "GESTÃO DOS PROJETOS DA ÁREA TÉCNICA E SUPORTE A TOMADA DE DECISÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "153": {
+    "id": "153",
+    "name": "GSI E SGA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "154": {
+    "id": "154",
+    "name": "JORNADA CLM",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "155": {
+    "id": "155",
+    "name": "Jornada Única de Pagamentos",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "156": {
+    "id": "156",
+    "name": "LEVANTAMENTO DE HLE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "157": {
+    "id": "157",
+    "name": "MVNO AUTORIZADA - DATORA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "158": {
+    "id": "158",
+    "name": "NÃO RETORNOU",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "159": {
+    "id": "159",
+    "name": "NETFONE_2.0",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "160": {
+    "id": "160",
+    "name": "NOVA REDE INTELIGENTE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "161": {
+    "id": "161",
+    "name": "NUMERAÇÃO FAKE PARA MVNOS AUTORIZADAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "162": {
+    "id": "162",
+    "name": "ODA; INTEGRAÇAO DIGITAL NOTAL 10;",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "163": {
+    "id": "163",
+    "name": "OSS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "164": {
+    "id": "164",
+    "name": "PEC - SSO PJ",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "165": {
+    "id": "165",
+    "name": "PEC - SSO PJ - SGVAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "166": {
+    "id": "166",
+    "name": "PEC MSE / CONEXÃO TORPEDO / CHECK CREDIT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "167": {
+    "id": "167",
+    "name": "PIX AUTOMATICO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "168": {
+    "id": "168",
+    "name": "PORTABILIDADE CRUZADA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "169": {
+    "id": "169",
+    "name": "PÓS-PAGO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "170": {
+    "id": "170",
+    "name": "PROJETO  MULTISDWAN",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "171": {
+    "id": "171",
+    "name": "PROJETO BANCO DO BRASIL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "172": {
+    "id": "172",
+    "name": "PROJETO CORREIOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "173": {
+    "id": "173",
+    "name": "PROJETO CSL - SIGLA DA ESTACAO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "174": {
+    "id": "174",
+    "name": "PROJETO DESATIVAÇÃO DE SISTEMAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "175": {
+    "id": "175",
+    "name": "PROJETO GERENCIAMENTO SDWAN HUAWEI",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "176": {
+    "id": "176",
+    "name": "PROJETO GESTÃO MULTISERVIÇOS DO CLIENTE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "177": {
+    "id": "177",
+    "name": "PROJETO IMS TAS NETFONE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "178": {
+    "id": "178",
+    "name": "PROJETO JORNADA EMPRESARIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "179": {
+    "id": "179",
+    "name": "PROJETO MELHORIAS REGUA DE COBRANÇA / OUTROS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "180": {
+    "id": "180",
+    "name": "PROJETO PIX RECORRENTE / OUTROS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "181": {
+    "id": "181",
+    "name": "PROJETO PORTAL MULTISERVICOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "182": {
+    "id": "182",
+    "name": "PROJETO REESTRUTURACAO DO CLA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "183": {
+    "id": "183",
+    "name": "PROJETOS FATURAMENTO MÓVEL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "184": {
+    "id": "184",
+    "name": "PROJETOS SVA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "185": {
+    "id": "185",
+    "name": "PROJETOS TORRE FATURAMENTO EMPRESARIAL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "186": {
+    "id": "186",
+    "name": "PROJETOS TORRE MEDIAÇÃO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "187": {
+    "id": "187",
+    "name": "PS8",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "188": {
+    "id": "188",
+    "name": "RESSARCIMENTO (APERFEIÇOAMENTO NO PROCESSO DE RESSARCIMENTO POR INTERRUPÇÃO DE SINAL SMP)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "189": {
+    "id": "189",
+    "name": "ROAMING",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "190": {
+    "id": "190",
+    "name": "SEGMENTACAO PME",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "191": {
+    "id": "191",
+    "name": "SICORP,FACHADASOAACRM,FACHADASOAOMS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "192": {
+    "id": "192",
+    "name": "SIEBEL RADAR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "193": {
+    "id": "193",
+    "name": "SISTEMAS DE FATURAMENTO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "194": {
+    "id": "194",
+    "name": "SQUAD DO ATIVAÇÃO SIMPLIFICADA (SONIC), FABRICA DE PROJETOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "195": {
+    "id": "195",
+    "name": "SSO PJ / MSE / SGWAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "196": {
+    "id": "196",
+    "name": "TODOS OS SISTEMAS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "197": {
+    "id": "197",
+    "name": "TRANSPORTE HOJE TELECOM - CSP 46",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "198": {
+    "id": "198",
+    "name": "VENDA APARELHO CARTÃO DE CRÉDITO PME",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "199": {
+    "id": "199",
+    "name": "GESTÃO DOS RECURSOS E ACOMPANHAMENTO DAS ATIVIDADES DA ÁREA TÉCNICA",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "200": {
+    "id": "200",
+    "name": "GOVERNANÇA SALESFORCE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "201": {
+    "id": "201",
+    "name": "ADTRAF, VMP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "202": {
+    "id": "202",
+    "name": "ATEN",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "203": {
+    "id": "203",
+    "name": "CAPSETTLE/ROAMING",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "204": {
+    "id": "204",
+    "name": "CCIA, ODS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "205": {
+    "id": "205",
+    "name": "CEMI-SIGA/FRAUDE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "206": {
+    "id": "206",
+    "name": "CFD",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "207": {
+    "id": "207",
+    "name": "FIELD SERVICE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "208": {
+    "id": "208",
+    "name": "FRAUDVIEW/FRAUDE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "209": {
+    "id": "209",
+    "name": "GRCS / GRC CORREIOS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "210": {
+    "id": "210",
+    "name": "GRCS / GRC CORREIOS (CONTRATO 101 E CONTRATO 1738)",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "211": {
+    "id": "211",
+    "name": "NGP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "212": {
+    "id": "212",
+    "name": "RAID-RECON/GAR-FRAUDE",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "213": {
+    "id": "213",
+    "name": "RPOL, SPSWEB, ODS",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "214": {
+    "id": "214",
+    "name": "SEARCH/JURÍDICO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "215": {
+    "id": "215",
+    "name": "SERVCELL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "216": {
+    "id": "216",
+    "name": "SIEBEL, GERENCIAS, ORBILL",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "217": {
+    "id": "217",
+    "name": "SISTEMA RAID",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "218": {
+    "id": "218",
+    "name": "SNR",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "219": {
+    "id": "219",
+    "name": "SUPORTE AO WFEP PRODUÇAO",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "220": {
+    "id": "220",
+    "name": "SUPORTE N3",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "221": {
+    "id": "221",
+    "name": "TEMIP, SIGAT, IGC, MULT",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "222": {
+    "id": "222",
+    "name": "TEMIP, VMP",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  }
+}

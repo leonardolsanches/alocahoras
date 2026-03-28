@@ -1,0 +1,1080 @@
+{% extends "base.html" %}
+
+{% block title %}Aprovação de Alocações{% endblock %}
+
+{% block content %}
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header analytics-header">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mb-0 me-4">
+                                    <i class="fas fa-check-circle me-2"></i>Aprovação
+                                </h5>
+                                <!-- Métricas analíticas compactas -->
+                                <div class="d-flex gap-3 analytics-metrics">
+                                    <span class="metric-item">
+                                        <i class="fas fa-users text-primary"></i>
+                                        <strong id="collaborators-count">{{ subordinates|length }}</strong>
+                                        <small>colaboradores</small>
+                                    </span>
+                                    <span class="metric-item">
+                                        <i class="fas fa-project-diagram text-info"></i>
+                                        <strong id="projects-count">-</strong>
+                                        <small>projetos</small>
+                                    </span>
+                                    <span class="metric-item">
+                                        <i class="fas fa-tasks text-secondary"></i>
+                                        <strong id="activities-count">-</strong>
+                                        <small>atividades</small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Status analíticos -->
+                                <div class="d-flex gap-2 status-analytics">
+                                    <span class="status-metric approved">
+                                        <i class="fas fa-check-circle"></i>
+                                        <strong id="approved-count">0</strong>
+                                    </span>
+                                    <span class="status-metric pending">
+                                        <i class="fas fa-clock"></i>
+                                        <strong id="pending-count">0</strong>
+                                    </span>
+                                    <span class="status-metric rejected">
+                                        <i class="fas fa-times-circle"></i>
+                                        <strong id="rejected-count">0</strong>
+                                    </span>
+                                </div>
+                                <div class="vr d-none d-md-block" style="height: 30px;"></div>
+                                <span id="selection-count" class="badge bg-info">0 selecionadas</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+
+                        <div class="mb-3 d-flex flex-wrap gap-2">
+                            <button id="select-all" class="btn btn-claro flex-fill" style="min-width: 140px;">
+                                <i class="fas fa-check-square me-2"></i>Selecionar Tudo
+                            </button>
+                            <button id="deselect-all" class="btn btn-secondary flex-fill" style="min-width: 140px;">
+                                <i class="fas fa-square me-2"></i>Desmarcar Tudo
+                            </button>
+                            <button id="approve-selected" class="btn btn-success flex-fill" style="min-width: 140px;">
+                                <i class="fas fa-thumbs-up"></i> Aprovar
+                            </button>
+                            <button id="reject-selected" class="btn btn-danger flex-fill" style="min-width: 140px;">
+                                <i class="fas fa-thumbs-down"></i> Reprovar
+                            </button>
+                        </div>
+
+                        <!-- Legenda de Cores e Controles -->
+                        <div class="color-legend mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-palette me-2"></i>Legenda de Status</h6>
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <span class="legend-item">
+                                            <div class="legend-color status-pending"></div>
+                                            Pendente
+                                        </span>
+                                        <span class="legend-item">
+                                            <div class="legend-color status-approved"></div>
+                                            Aprovado
+                                        </span>
+                                        <span class="legend-item">
+                                            <div class="legend-color status-rejected"></div>
+                                            Rejeitado
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-layer-group me-2"></i>Visualização</h6>
+                                    <div class="d-flex gap-2">
+                                        <button class="hierarchy-btn btn btn-claro active" onclick="changeHierarchy('collaborators')">
+                                            <i class="fas fa-users me-1"></i>Colaboradores
+                                        </button>
+                                        <button class="hierarchy-btn btn btn-outline-claro" onclick="changeHierarchy('projects')">
+                                            <i class="fas fa-project-diagram me-1"></i>Projetos
+                                        </button>
+                                        <button class="hierarchy-btn btn btn-outline-claro" onclick="changeHierarchy('activities')">
+                                            <i class="fas fa-tasks me-1"></i>Atividades
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão para visualização mobile em tela cheia -->
+                        <div class="d-block d-lg-none mb-3">
+                            <button id="mobile-fullscreen-btn" class="btn btn-info w-100" style="padding: 12px; text-align: center; overflow: hidden; white-space: nowrap;">
+                                <i class="fas fa-expand-arrows-alt me-2"></i>Visualizar em Tela Cheia
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th style="width: 200px;">Colaborador</th>
+                                        <th>Jan</th>
+                                        <th>Fev</th>
+                                        <th>Mar</th>
+                                        <th>Abr</th>
+                                        <th>Mai</th>
+                                        <th>Jun</th>
+                                        <th>Jul</th>
+                                        <th>Ago</th>
+                                        <th>Set</th>
+                                        <th>Out</th>
+                                        <th>Nov</th>
+                                        <th>Dez</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for subordinate in subordinates %}
+                                    <!-- Linha principal do colaborador -->
+                                    <tr class="collaborator-row" data-collaborator="{{ subordinate.name }}">
+                                        <td class="collaborator-name">
+                                            <span class="expand-toggle" data-collaborator="{{ subordinate.name }}" onclick="toggleDrillDown('{{ subordinate.name }}')">
+                                                <i class="fas fa-plus-square me-2" id="icon-{{ loop.index0 }}"></i>
+                                            </span>
+                                            {{ subordinate.name }}
+                                        </td>
+                                        {% for month in ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'] %}
+                                        {% set status = subordinate.approval_statuses.get(month, 'pending') %}
+                                        <td class="month-cell status-{{ status }}" 
+                                            data-collaborator="{{ subordinate.name }}" 
+                                            data-month="{{ month }}"
+                                            onclick="toggleCell(this)">
+                                            {{ subordinate.monthly_allocations.get(month, '') }}
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                    
+                                    <!-- Linha de drill-down (inicialmente oculta) -->
+                                    <tr class="drill-down-row" id="drill-{{ loop.index0 }}" data-parent="{{ subordinate.name }}" style="display: none;">
+                                        <td colspan="13" class="drill-down-content">
+                                            <div class="drill-down-container p-3" style="background-color: #f8f9fa; border-left: 4px solid var(--claro-red);">
+                                                <strong class="text-muted">Projetos e Atividades de {{ subordinate.name }}:</strong>
+                                                <div class="mt-2" id="drill-content-{{ loop.index0 }}">
+                                                    <div class="text-muted">
+                                                        <i class="fas fa-spinner fa-spin me-2"></i>Carregando detalhes...
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    {% if not subordinates %}
+                                    <tr>
+                                        <td colspan="13" class="text-center text-muted">
+                                            Nenhum subordinado encontrado
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCells = new Set();
+
+        function toggleCell(cell) {
+            if (cell.textContent.trim() === '') return;
+            
+            if (selectedCells.has(cell)) {
+                selectedCells.delete(cell);
+                cell.classList.remove('cell-selected');
+            } else {
+                selectedCells.add(cell);
+                cell.classList.add('cell-selected');
+            }
+            updateSelectionCount();
+        }
+
+        function updateSelectionCount() {
+            document.getElementById('selection-count').textContent = selectedCells.size + ' selecionadas';
+        }
+
+        document.getElementById('select-all').onclick = function() {
+            document.querySelectorAll('.month-cell').forEach(cell => {
+                if (cell.textContent.trim() !== '') {
+                    selectedCells.add(cell);
+                    cell.classList.add('cell-selected');
+                }
+            });
+            updateSelectionCount();
+        };
+
+        document.getElementById('deselect-all').onclick = function() {
+            selectedCells.forEach(cell => cell.classList.remove('cell-selected'));
+            selectedCells.clear();
+            updateSelectionCount();
+        };
+
+        document.getElementById('approve-selected').onclick = function() {
+            if (selectedCells.size === 0) {
+                alert('Selecione células para aprovar');
+                return;
+            }
+            processApprovals('approved');
+        };
+
+        document.getElementById('reject-selected').onclick = function() {
+            if (selectedCells.size === 0) {
+                alert('Selecione células para reprovar');
+                return;
+            }
+            processApprovals('rejected');
+        };
+
+        function processApprovals(status) {
+            const approvals = Array.from(selectedCells).map(cell => ({
+                collaborator: cell.dataset.collaborator,
+                month: cell.dataset.month,
+                status: status
+            }));
+
+            fetch('/api/approve-cells', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ approvals: approvals })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    selectedCells.forEach(cell => {
+                        cell.className = 'month-cell status-' + status;
+                    });
+                    
+                    // Atualizar contadores analíticos
+                    updateStatusCounts();
+                    
+                    selectedCells.clear();
+                    updateSelectionCount();
+                    alert(data.message);
+                } else {
+                    alert('Erro: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao processar aprovações');
+            });
+        }
+
+        // === BARRA ANALÍTICA ===
+        function loadAnalytics() {
+            fetch('/api/analytics-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateAnalytics(data.analytics);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar analytics:', error);
+                });
+        }
+
+        function updateAnalytics(analytics) {
+            // Atualizar contadores principais
+            document.getElementById('projects-count').textContent = analytics.projects_count;
+            document.getElementById('activities-count').textContent = analytics.activities_count;
+            
+            // Atualizar contadores de status
+            document.getElementById('approved-count').textContent = analytics.approved_count;
+            document.getElementById('pending-count').textContent = analytics.pending_count;
+            document.getElementById('rejected-count').textContent = analytics.rejected_count;
+        }
+
+        function updateStatusCounts() {
+            // Contar status atuais na tabela
+            const approvedCells = document.querySelectorAll('.month-cell.status-approved').length;
+            const pendingCells = document.querySelectorAll('.month-cell.status-pending').length;
+            const rejectedCells = document.querySelectorAll('.month-cell.status-rejected').length;
+            
+            document.getElementById('approved-count').textContent = approvedCells;
+            document.getElementById('pending-count').textContent = pendingCells;
+            document.getElementById('rejected-count').textContent = rejectedCells;
+        }
+
+        // Carregar analytics ao inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnalytics();
+            updateStatusCounts();
+            setupHierarchyControls();
+        });
+
+        // === FUNCIONALIDADE DRILL-DOWN ===
+        function toggleDrillDown(collaboratorName) {
+            const drillRow = document.querySelector(`[data-parent="${collaboratorName}"]`);
+            const icon = document.querySelector(`[data-collaborator="${collaboratorName}"] i`);
+            const contentDiv = drillRow.querySelector('[id^="drill-content-"]');
+            
+            if (drillRow.style.display === 'none') {
+                // Expandir
+                drillRow.style.display = 'table-row';
+                icon.className = 'fas fa-minus-square me-2';
+                
+                // Carregar dados se ainda não foram carregados
+                if (contentDiv.innerHTML.includes('Carregando')) {
+                    loadCollaboratorDetails(collaboratorName, contentDiv);
+                }
+            } else {
+                // Recolher
+                drillRow.style.display = 'none';
+                icon.className = 'fas fa-plus-square me-2';
+            }
+        }
+
+        function loadCollaboratorDetails(collaboratorName, contentDiv) {
+            contentDiv.innerHTML = '<div class="text-center py-3"><i class="fas fa-spinner fa-spin me-2"></i>Carregando detalhes...</div>';
+            
+            fetch(`/api/collaborator-details/${encodeURIComponent(collaboratorName)}`, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (response.status === 401) {
+                    throw new Error('Sessão expirada. Faça login novamente.');
+                }
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    renderCollaboratorDetails(data.details, contentDiv);
+                } else {
+                    contentDiv.innerHTML = `<div class="text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Erro: ${data.error || 'Erro desconhecido'}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar detalhes:', error);
+                contentDiv.innerHTML = `<div class="text-danger"><i class="fas fa-exclamation-triangle me-2"></i>${error.message}</div>`;
+            });
+        }
+
+        function renderCollaboratorDetails(details, contentDiv) {
+            if (details.length === 0) {
+                contentDiv.innerHTML = '<div class="text-muted">Nenhum projeto encontrado para este colaborador.</div>';
+                return;
+            }
+            
+            const months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+            let html = `
+            <div class="hierarchy-drill-down">
+                <div class="drill-instructions mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Como usar: 1º clique = aprova • 2º clique = reprova • 3º clique = volta ao pendente
+                    </small>
+                </div>
+            `;
+            
+            details.forEach((project, projectIndex) => {
+                const projectId = `project-${projectIndex}`;
+                
+                // Linha do projeto (nível 1) com valores calculados
+                html += `
+                    <div class="drill-project-row">
+                        <div class="d-flex align-items-center">
+                            <span class="hierarchy-toggle" onclick="toggleProjectActivities('${projectId}')">
+                                <i class="fas fa-plus-square me-2" id="toggle-${projectId}"></i>
+                            </span>
+                            <div class="project-info">
+                                <strong class="text-primary">${project.tipo_alocacao}</strong>
+                                <br>
+                                <span class="text-muted">${project.projetos}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 12 células do projeto com valores reais -->
+                        <div class="project-months">
+                            ${months.map((month, monthIndex) => {
+                                const value = project.monthly_totals[monthIndex];
+                                const displayValue = value > 0 ? Math.round(value) : '';
+                                const cellClass = value > 0 ? 'status-approved' : 'status-pending';
+                                return `
+                                    <div class="drill-month-container">
+                                        <div class="month-label">${month.substring(0,3).toUpperCase()}</div>
+                                        <div class="drill-month-cell project-cell ${cellClass}" 
+                                             data-level="project"
+                                             data-project="${project.projetos}"
+                                             data-month="${month}"
+                                             data-value="${value}"
+                                             onclick="toggleHierarchyCell(this)"
+                                             title="${month}: ${value}%">
+                                            ${displayValue}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                // Atividades do projeto (nível 2) com valores reais
+                html += `<div class="drill-activities-container" id="${projectId}" style="display: none;">`;
+                
+                project.atividades.forEach((atividade, actIndex) => {
+                    html += `
+                        <div class="drill-activity-row">
+                            <div class="activity-info">
+                                <span class="text-secondary ms-4">${atividade.nome}</span>
+                            </div>
+                            
+                            <!-- 12 células da atividade com valores reais -->
+                            <div class="activity-months">
+                                ${months.map((month, monthIndex) => {
+                                    const value = atividade.monthly_values[monthIndex];
+                                    const displayValue = value > 0 ? Math.round(value) : '';
+                                    const cellClass = value > 0 ? 'status-approved' : 'status-pending';
+                                    return `
+                                        <div class="drill-month-container">
+                                            <div class="month-label">${month.substring(0,3).toUpperCase()}</div>
+                                            <div class="drill-month-cell activity-cell ${cellClass}"
+                                                 data-level="activity" 
+                                                 data-project="${project.projetos}"
+                                                 data-activity="${atividade.nome}"
+                                                 data-month="${month}"
+                                                 data-value="${value}"
+                                                 onclick="toggleHierarchyCell(this)"
+                                                 title="${month}: ${value}%">
+                                                ${displayValue}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            contentDiv.innerHTML = html;
+        }
+
+        function toggleProjectActivities(projectId) {
+            const container = document.getElementById(projectId);
+            const icon = document.getElementById(`toggle-${projectId}`);
+            
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                icon.className = 'fas fa-minus-square me-2';
+            } else {
+                container.style.display = 'none';
+                icon.className = 'fas fa-plus-square me-2';
+            }
+        }
+
+        function toggleHierarchyCell(cell) {
+            const currentStatus = cell.classList.contains('status-approved') ? 'approved' :
+                                 cell.classList.contains('status-rejected') ? 'rejected' : 'pending';
+            
+            let newStatus = 'pending';
+            if (currentStatus === 'pending') newStatus = 'approved';
+            else if (currentStatus === 'approved') newStatus = 'rejected';
+            
+            // Atualizar a célula
+            cell.className = `drill-month-cell ${cell.dataset.level}-cell status-${newStatus}`;
+            
+            // Aplicar lógica hierárquica
+            if (cell.dataset.level === 'project') {
+                applyProjectHierarchy(cell, newStatus);
+            } else if (cell.dataset.level === 'activity') {
+                applyActivityHierarchy(cell, newStatus);
+            }
+        }
+
+        function applyProjectHierarchy(projectCell, status) {
+            const project = projectCell.dataset.project;
+            const month = projectCell.dataset.month;
+            
+            console.log(`Applying ${status} to project ${project} for ${month}`);
+            
+            // Se projeto aprovado, aprovar todas atividades
+            if (status === 'approved') {
+                const activityCells = document.querySelectorAll(
+                    `[data-level="activity"][data-project="${CSS.escape(project)}"][data-month="${month}"]`
+                );
+                console.log(`Found ${activityCells.length} activity cells to approve`);
+                activityCells.forEach(cell => {
+                    cell.className = `drill-month-cell activity-cell status-approved`;
+                });
+            }
+            // Se projeto rejeitado, rejeitar todas atividades
+            else if (status === 'rejected') {
+                const activityCells = document.querySelectorAll(
+                    `[data-level="activity"][data-project="${CSS.escape(project)}"][data-month="${month}"]`
+                );
+                console.log(`Found ${activityCells.length} activity cells to reject`);
+                activityCells.forEach(cell => {
+                    cell.className = `drill-month-cell activity-cell status-rejected`;
+                });
+            }
+        }
+
+        function applyActivityHierarchy(activityCell, status) {
+            const project = activityCell.dataset.project;
+            const month = activityCell.dataset.month;
+            
+            // Se atividade rejeitada, rejeitar projeto pai
+            if (status === 'rejected') {
+                const projectCell = document.querySelector(
+                    `[data-level="project"][data-project="${project}"][data-month="${month}"]`
+                );
+                if (projectCell) {
+                    projectCell.className = `drill-month-cell project-cell status-rejected`;
+                }
+            }
+            // Se todas atividades aprovadas, aprovar projeto
+            else if (status === 'approved') {
+                const allActivityCells = document.querySelectorAll(
+                    `[data-level="activity"][data-project="${project}"][data-month="${month}"]`
+                );
+                const allApproved = Array.from(allActivityCells).every(cell => 
+                    cell.classList.contains('status-approved')
+                );
+                
+                if (allApproved) {
+                    const projectCell = document.querySelector(
+                        `[data-level="project"][data-project="${project}"][data-month="${month}"]`
+                    );
+                    if (projectCell) {
+                        projectCell.className = `drill-month-cell project-cell status-approved`;
+                    }
+                }
+            }
+        }
+
+        // === FUNCIONALIDADE MOBILE TELA CHEIA ===
+        document.getElementById('mobile-fullscreen-btn').addEventListener('click', function() {
+            openMobileFullscreen();
+        });
+
+        function openMobileFullscreen() {
+            // Criar modal fullscreen
+            const modal = document.createElement('div');
+            modal.id = 'mobile-fullscreen-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: white;
+                z-index: 9999;
+                overflow: auto;
+                padding: 10px;
+                box-sizing: border-box;
+            `;
+
+            // Cabeçalho do modal
+            const header = document.createElement('div');
+            header.style.cssText = `
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                padding: 10px;
+                background: #8B1538;
+                color: white;
+                border-radius: 5px;
+            `;
+            header.innerHTML = `
+                <h6 style="margin: 0;"><i class="fas fa-calendar-check"></i> Aprovação - Tela Cheia</h6>
+                <button id="close-fullscreen" style="background: none; border: none; color: white; font-size: 20px;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            // Botões de ação no modal
+            const actionButtons = document.createElement('div');
+            actionButtons.style.cssText = `
+                display: flex;
+                gap: 5px;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+            `;
+            actionButtons.innerHTML = `
+                <button id="modal-select-all" class="btn btn-claro btn-sm">
+                    <i class="fas fa-check-square"></i> Tudo
+                </button>
+                <button id="modal-deselect-all" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-square"></i> Limpar
+                </button>
+                <button id="modal-approve" class="btn btn-success btn-sm">
+                    <i class="fas fa-thumbs-up"></i> Aprovar
+                </button>
+                <button id="modal-reject" class="btn btn-danger btn-sm">
+                    <i class="fas fa-thumbs-down"></i> Reprovar
+                </button>
+                <span id="modal-selection-count" class="badge bg-info ms-auto">0 selecionadas</span>
+            `;
+
+            // Clonar tabela para o modal
+            const originalTable = document.querySelector('.table-responsive');
+            const tableClone = originalTable.cloneNode(true);
+            tableClone.style.cssText = `
+                font-size: 12px;
+                overflow-x: auto;
+            `;
+
+            // Montar modal
+            modal.appendChild(header);
+            modal.appendChild(actionButtons);
+            modal.appendChild(tableClone);
+            document.body.appendChild(modal);
+
+            // Configurar funcionalidade no modal
+            setupModalFunctionality(modal);
+
+            // Fechar modal
+            document.getElementById('close-fullscreen').addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+
+            // Detectar mudança de orientação
+            if (screen.orientation) {
+                screen.orientation.addEventListener('change', function() {
+                    if (screen.orientation.angle === 0 || screen.orientation.angle === 180) {
+                        // Vertical - sugerir virar
+                        header.innerHTML = `
+                            <h6 style="margin: 0;"><i class="fas fa-mobile-alt"></i> Vire o celular para melhor visualização</h6>
+                            <button id="close-fullscreen" style="background: none; border: none; color: white; font-size: 20px;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                    } else {
+                        // Horizontal - modo otimizado
+                        header.innerHTML = `
+                            <h6 style="margin: 0;"><i class="fas fa-calendar-check"></i> Aprovação - Modo Horizontal</h6>
+                            <button id="close-fullscreen" style="background: none; border: none; color: white; font-size: 20px;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                    }
+                    
+                    // Re-attach close event
+                    document.getElementById('close-fullscreen').addEventListener('click', function() {
+                        document.body.removeChild(modal);
+                    });
+                });
+            }
+        }
+
+        function setupModalFunctionality(modal) {
+            const modalCells = modal.querySelectorAll('.month-cell');
+            let modalSelectedCells = new Set();
+
+            // Seleção de células no modal
+            modalCells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    if (modalSelectedCells.has(cell)) {
+                        modalSelectedCells.delete(cell);
+                        cell.classList.remove('cell-selected');
+                    } else {
+                        modalSelectedCells.add(cell);
+                        cell.classList.add('cell-selected');
+                    }
+                    updateModalSelectionCount(modalSelectedCells.size);
+                });
+            });
+
+            // Botões do modal
+            modal.querySelector('#modal-select-all').addEventListener('click', function() {
+                modalCells.forEach(cell => {
+                    if (!modalSelectedCells.has(cell)) {
+                        modalSelectedCells.add(cell);
+                        cell.classList.add('cell-selected');
+                    }
+                });
+                updateModalSelectionCount(modalSelectedCells.size);
+            });
+
+            modal.querySelector('#modal-deselect-all').addEventListener('click', function() {
+                modalSelectedCells.forEach(cell => {
+                    cell.classList.remove('cell-selected');
+                });
+                modalSelectedCells.clear();
+                updateModalSelectionCount(0);
+            });
+
+            modal.querySelector('#modal-approve').addEventListener('click', function() {
+                processModalApprovals(modalSelectedCells, 'approved', modal);
+            });
+
+            modal.querySelector('#modal-reject').addEventListener('click', function() {
+                processModalApprovals(modalSelectedCells, 'rejected', modal);
+            });
+        }
+
+        function updateModalSelectionCount(count) {
+            const counter = document.getElementById('modal-selection-count');
+            if (counter) {
+                counter.textContent = count + ' selecionadas';
+            }
+        }
+
+        function processModalApprovals(selectedCells, status, modal) {
+            if (selectedCells.size === 0) {
+                alert('Selecione pelo menos uma célula para ' + (status === 'approved' ? 'aprovar' : 'reprovar'));
+                return;
+            }
+
+            const approvals = Array.from(selectedCells).map(cell => ({
+                collaborator: cell.dataset.collaborator,
+                month: cell.dataset.month,
+                status: status
+            }));
+
+            fetch('/api/approve-cells', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ approvals: approvals })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Atualizar células no modal
+                    selectedCells.forEach(cell => {
+                        cell.className = 'month-cell status-' + status;
+                    });
+                    
+                    // Atualizar tabela principal também
+                    approvals.forEach(approval => {
+                        const mainCell = document.querySelector(`[data-collaborator="${approval.collaborator}"][data-month="${approval.month}"]`);
+                        if (mainCell) {
+                            mainCell.className = 'month-cell status-' + status;
+                        }
+                    });
+
+                    selectedCells.clear();
+                    updateModalSelectionCount(0);
+                    
+                    const statusText = status === 'approved' ? 'aprovadas' : 'reprovadas';
+                    alert(`${approvals.length} alocações ${statusText} com sucesso!`);
+                } else {
+                    alert('Erro ao processar aprovações: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao processar aprovações');
+            });
+        }
+
+        // === FUNCIONALIDADES DOS BOTÕES DE HIERARQUIA ===
+        function setupHierarchyControls() {
+            const viewControls = document.querySelectorAll('input[name="viewLevel"]');
+            viewControls.forEach(control => {
+                control.addEventListener('change', function() {
+                    changeHierarchyView(this.value);
+                });
+            });
+        }
+
+        function changeHierarchyView(viewType) {
+            console.log('Mudando visualização para:', viewType);
+            
+            // Atualizar labels visuais
+            const allLabels = document.querySelectorAll('label[for^="view"]');
+            allLabels.forEach(label => {
+                label.classList.remove('active-view');
+            });
+            
+            const activeLabel = document.querySelector(`label[for="view${viewType.charAt(0).toUpperCase() + viewType.slice(1)}"]`);
+            if (activeLabel) {
+                activeLabel.classList.add('active-view');
+            }
+            
+            // Aplicar filtro real na tabela
+            applyHierarchyFilter(viewType);
+            
+            // Mostrar mensagem de feedback
+            const statusMsg = `Visualização alterada para: ${getViewTypeLabel(viewType)}`;
+            showTemporaryMessage(statusMsg);
+        }
+
+        function applyHierarchyFilter(viewType) {
+            console.log("Aplicando filtro de hierarquia:", viewType);
+            
+            // Buscar dados reais da API funcionando
+            fetch('/api/hierarchy-data')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Dados recebidos para hierarquia:", data);
+                    
+                    if (data.data && data.data.length > 0) {
+                        // Reorganizar dados conforme hierarquia
+                        reorganizeDataByHierarchy(data.data, viewType);
+                    } else {
+                        showTemporaryMessage('Nenhum dado encontrado para hierarquia');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                    showTemporaryMessage('Erro ao carregar dados da hierarquia');
+                });
+        }
+        
+        function reorganizeDataByHierarchy(data, viewType) {
+            const tbody = document.getElementById('collaborators-table-body');
+            if (!tbody) return;
+            
+            console.log("Reorganizando dados:", data.length, "itens para", viewType);
+            
+            // Salvar conteúdo original se ainda não foi salvo
+            if (!window.originalTableContent) {
+                window.originalTableContent = tbody.innerHTML;
+            }
+            
+            // Se não há dados ou está na visualização padrão, restaurar original
+            if (data.length === 0 || viewType === 'collaborators') {
+                tbody.innerHTML = window.originalTableContent;
+                return;
+            }
+            
+            // Limpar tabela para nova hierarquia
+            tbody.innerHTML = '';
+            
+            let groupedData = {};
+            
+            switch(viewType) {
+                case 'projects':
+                    // Agrupar por projeto
+                    data.forEach(item => {
+                        if (!groupedData[item.project]) {
+                            groupedData[item.project] = [];
+                        }
+                        groupedData[item.project].push(item);
+                    });
+                    
+                    // Renderizar por projeto
+                    Object.keys(groupedData).sort().forEach(project => {
+                        createHierarchyGroup(tbody, project, groupedData[project], 'project');
+                    });
+                    break;
+                    
+                case 'activities':
+                    // Agrupar por atividade
+                    data.forEach(item => {
+                        if (!groupedData[item.activity]) {
+                            groupedData[item.activity] = [];
+                        }
+                        groupedData[item.activity].push(item);
+                    });
+                    
+                    // Renderizar por atividade
+                    Object.keys(groupedData).sort().forEach(activity => {
+                        createHierarchyGroup(tbody, activity, groupedData[activity], 'activity');
+                    });
+                    break;
+            }
+        }
+        
+        function createHierarchyGroup(tbody, groupName, items, groupType) {
+            // Criar linha de cabeçalho do grupo
+            const headerRow = document.createElement('tr');
+            headerRow.className = `hierarchy-group hierarchy-${groupType}`;
+            headerRow.innerHTML = `
+                <td colspan="13" style="background-color: #8B1538; color: white; font-weight: bold; padding: 15px; cursor: pointer;" onclick="toggleHierarchyGroup(this)">
+                    <span class="hierarchy-toggle">▼</span>
+                    <span style="margin-left: 10px;">${groupName} (${items.length} itens)</span>
+                </td>
+            `;
+            tbody.appendChild(headerRow);
+            
+            // Criar container expansível
+            const containerRow = document.createElement('tr');
+            containerRow.className = 'hierarchy-content';
+            containerRow.innerHTML = `
+                <td colspan="13" style="padding: 0;">
+                    <div class="hierarchy-items" style="background-color: #f8f9fa; padding: 15px;">
+                        ${items.map(item => createHierarchyItem(item, groupType)).join('')}
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(containerRow);
+        }
+        
+        function createHierarchyItem(item, groupType) {
+            let content = '';
+            
+            switch(groupType) {
+                case 'project':
+                    content = `
+                        <div class="hierarchy-item" style="margin: 8px 0; padding: 12px; background: white; border-radius: 4px; border-left: 4px solid #8B1538; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <strong style="color: #8B1538;">Colaborador:</strong> ${item.collaborator} | 
+                            <strong style="color: #8B1538;">Atividade:</strong> ${item.activity}
+                            ${item.type ? ` | <strong style="color: #8B1538;">Tipo:</strong> ${item.type}` : ''}
+                        </div>
+                    `;
+                    break;
+                case 'activity':
+                    content = `
+                        <div class="hierarchy-item" style="margin: 8px 0; padding: 12px; background: white; border-radius: 4px; border-left: 4px solid #8B1538; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <strong style="color: #8B1538;">Colaborador:</strong> ${item.collaborator} | 
+                            <strong style="color: #8B1538;">Projeto:</strong> ${item.project}
+                            ${item.type ? ` | <strong style="color: #8B1538;">Tipo:</strong> ${item.type}` : ''}
+                        </div>
+                    `;
+                    break;
+            }
+            
+            return content;
+        }
+        
+        function toggleHierarchyGroup(element) {
+            const parentRow = element.closest('tr');
+            const contentRow = parentRow.nextElementSibling;
+            
+            if (contentRow && contentRow.classList.contains('hierarchy-content')) {
+                const isVisible = contentRow.style.display !== 'none';
+                contentRow.style.display = isVisible ? 'none' : 'table-row';
+                
+                const toggleIcon = element.querySelector('.hierarchy-toggle');
+                if (toggleIcon) {
+                    toggleIcon.textContent = isVisible ? '▶' : '▼';
+                }
+            }
+        }
+        
+        function applyVisualHierarchy(viewType) {
+            const tbody = document.getElementById('collaborators-table-body');
+            if (!tbody) return;
+            
+            const rows = Array.from(tbody.querySelectorAll('tr[data-collaborator]'));
+            
+            // Limpar estilos anteriores
+            rows.forEach(row => {
+                row.style.backgroundColor = '';
+                row.style.borderLeft = '';
+                row.style.borderTop = '';
+            });
+            
+            // Aplicar cores visuais como fallback
+            rows.forEach((row, index) => {
+                switch(viewType) {
+                    case 'projects':
+                        if (index % 4 === 0) {
+                            row.style.backgroundColor = '#e3f2fd';
+                            row.style.borderTop = '3px solid var(--claro-red)';
+                        }
+                        break;
+                    case 'activities':
+                        row.style.borderLeft = `4px solid ${['#ffc107', '#198754', '#dc3545'][index % 3]}`;
+                        break;
+                }
+            });
+        }
+
+        function getViewTypeLabel(viewType) {
+            switch(viewType) {
+                case 'collaborators': return 'Colaboradores';
+                case 'projects': return 'Projetos';
+                case 'activities': return 'Atividades';
+                default: return 'Colaboradores';
+            }
+        }
+
+        function showTemporaryMessage(message) {
+            // Remover mensagem anterior se existir
+            const existingMsg = document.querySelector('.hierarchy-temp-message');
+            if (existingMsg) {
+                existingMsg.remove();
+            }
+            
+            // Criar nova mensagem
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'hierarchy-temp-message alert alert-info mt-2';
+            msgDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            msgDiv.innerHTML = `<i class="fas fa-info-circle me-2"></i>${message}`;
+            
+            document.body.appendChild(msgDiv);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                if (msgDiv.parentNode) {
+                    msgDiv.remove();
+                }
+            }, 3000);
+        }
+
+        function changeHierarchy(type) {
+            console.log("Mudando visualização para:", type);
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.hierarchy-btn').forEach(btn => {
+                btn.classList.remove('active', 'btn-claro');
+                btn.classList.add('btn-outline-claro');
+            });
+            event.target.classList.remove('btn-outline-claro');
+            event.target.classList.add('active', 'btn-claro');
+            
+            // Aplicar nova hierarquia
+            applyHierarchyFilter(type);
+            
+            // Mostrar feedback
+            const statusMsg = `Visualização alterada para: ${getViewTypeLabel(type)}`;
+            showTemporaryMessage(statusMsg);
+        }
+
+        function expandAllProjects() {
+            const hierarchyDiv = document.querySelector('.hierarchy-drill-down');
+            if (!hierarchyDiv) return;
+            
+            const projectToggles = hierarchyDiv.querySelectorAll('.hierarchy-toggle i');
+            const activityContainers = hierarchyDiv.querySelectorAll('.project-activities');
+            
+            projectToggles.forEach(toggle => {
+                toggle.className = 'fas fa-minus-square me-2';
+            });
+            
+            activityContainers.forEach(container => {
+                container.style.display = 'block';
+            });
+        }
+
+        function collapseAllProjects() {
+            const hierarchyDiv = document.querySelector('.hierarchy-drill-down');
+            if (!hierarchyDiv) return;
+            
+            const projectToggles = hierarchyDiv.querySelectorAll('.hierarchy-toggle i');
+            const activityContainers = hierarchyDiv.querySelectorAll('.project-activities');
+            
+            projectToggles.forEach(toggle => {
+                toggle.className = 'fas fa-plus-square me-2';
+            });
+            
+            activityContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+        }
+    </script>
+{% endblock %}
